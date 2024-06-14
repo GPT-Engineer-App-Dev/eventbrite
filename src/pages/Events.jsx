@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, VStack, Heading, Text, Button, Box, HStack, useToast } from "@chakra-ui/react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Events = () => {
@@ -31,6 +31,10 @@ const Events = () => {
     navigate(`/edit-event/${id}`);
   };
 
+  const handleViewEventDetails = (id) => {
+    navigate(`/event-details/${id}`);
+  };
+
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <VStack spacing={4} width="100%">
@@ -43,6 +47,7 @@ const Events = () => {
               <Heading as="h2" size="md">{event.title}</Heading>
               <Text mt={2}>{event.description}</Text>
               <HStack spacing={4} mt={4}>
+                <Button leftIcon={<FaEye />} colorScheme="green" onClick={() => handleViewEventDetails(event.id)}>View Details</Button>
                 <Button leftIcon={<FaEdit />} colorScheme="blue" onClick={() => handleEditEvent(event.id)}>Edit</Button>
                 <Button leftIcon={<FaTrash />} colorScheme="red" onClick={() => handleDeleteEvent(event.id)}>Delete</Button>
               </HStack>
